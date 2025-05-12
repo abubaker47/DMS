@@ -15,7 +15,7 @@ class DepartmentPolicy
      */
     public function viewAny(User $user): bool
     {
-        return true; // All users can view departments
+        return $user->isAdmin(); // Admin users can view departments
     }
 
     /**
@@ -23,7 +23,7 @@ class DepartmentPolicy
      */
     public function view(User $user, Department $department): bool
     {
-        return true; // All users can view departments
+        return $user->isAdmin(); // Admin users can view departments
     }
 
     /**

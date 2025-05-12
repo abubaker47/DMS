@@ -15,7 +15,7 @@ class FileTypePolicy
      */
     public function viewAny(User $user): bool
     {
-        return true; // All users can view file types
+        return $user->isAdmin(); // All users can view file types
     }
 
     /**
@@ -23,7 +23,7 @@ class FileTypePolicy
      */
     public function view(User $user, FileType $fileType): bool
     {
-        return true; // All users can view file types
+        return $user->isAdmin(); // All users can view file types
     }
 
     /**
