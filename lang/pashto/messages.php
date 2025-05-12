@@ -25,7 +25,7 @@ return [
     'error' => 'تېروتنه',
     'warning' => 'خبرداری',
     'info' => 'معلومات',
-    
+
     // Departments
     'departments' => 'څانګې',
     'department' => 'څانګه',
@@ -38,7 +38,7 @@ return [
     'department_created' => 'څانګه په بریالیتوب سره جوړه شوه',
     'department_updated' => 'څانګه په بریالیتوب سره تازه شوه',
     'department_deleted' => 'څانګه په بریالیتوب سره حذف شوه',
-    
+
     // Users
     'users' => 'کاروونکي',
     'user' => 'کاروونکی',
@@ -62,7 +62,7 @@ return [
     'user_created' => 'کاروونکی په بریالیتوب سره جوړ شو',
     'user_updated' => 'کاروونکی په بریالیتوب سره تازه شو',
     'user_deleted' => 'کاروونکی په بریالیتوب سره حذف شو',
-    
+
     // Documents
     'documents' => 'اسناد',
     'document' => 'سند',
@@ -95,7 +95,7 @@ return [
     'action' => 'عمل',
     'notes' => 'یادداشتونه',
     'update_status' => 'حالت تازه کول',
-    
+
     // File Types
     'file_types' => 'د فایل ډولونه',
     'file_type' => 'د فایل ډول',
@@ -109,7 +109,7 @@ return [
     'file_type_created' => 'د فایل ډول په بریالیتوب سره جوړ شو',
     'file_type_updated' => 'د فایل ډول په بریالیتوب سره تازه شو',
     'file_type_deleted' => 'د فایل ډول په بریالیتوب سره حذف شو',
-    
+
     // Languages
     'english' => 'انګلیسي',
     'dari' => 'دري',
@@ -117,7 +117,7 @@ return [
     'language' => 'ژبه',
     'change_language' => 'ژبه بدلول',
     'language_updated' => 'د ژبې غوراوی په بریالیتوب سره تازه شو',
-    
+
     // Notifications
     'notifications' => 'خبرتیاوې',
     'notification' => 'خبرتیا',

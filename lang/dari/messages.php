@@ -25,7 +25,7 @@ return [
     'error' => 'خطا',
     'warning' => 'هشدار',
     'info' => 'اطلاعات',
-    
+
     // Departments
     'departments' => 'دیپارتمنت ها',
     'department' => 'دیپارتمنت',
@@ -38,7 +38,7 @@ return [
     'department_created' => 'دیپارتمنت با موفقیت ایجاد شد',
     'department_updated' => 'دیپارتمنت با موفقیت به روز شد',
     'department_deleted' => 'دیپارتمنت با موفقیت حذف شد',
-    
+
     // Users
     'users' => 'کاربران',
     'user' => 'کاربر',
@@ -62,7 +62,7 @@ return [
     'user_created' => 'کاربر با موفقیت ایجاد شد',
     'user_updated' => 'کاربر با موفقیت به روز شد',
     'user_deleted' => 'کاربر با موفقیت حذف شد',
-    
+
     // Documents
     'documents' => 'اسناد',
     'document' => 'سند',
@@ -95,7 +95,7 @@ return [
     'action' => 'عملیات',
     'notes' => 'یادداشت ها',
     'update_status' => 'به روز رسانی وضعیت',
-    
+
     // File Types
     'file_types' => 'انواع فایل',
     'file_type' => 'نوع فایل',
@@ -109,7 +109,7 @@ return [
     'file_type_created' => 'نوع فایل با موفقیت ایجاد شد',
     'file_type_updated' => 'نوع فایل با موفقیت به روز شد',
     'file_type_deleted' => 'نوع فایل با موفقیت حذف شد',
-    
+
     // Languages
     'english' => 'انگلیسی',
     'dari' => 'دری',
@@ -117,7 +117,7 @@ return [
     'language' => 'زبان',
     'change_language' => 'تغییر زبان',
     'language_updated' => 'ترجیح زبان با موفقیت به روز شد',
-    
+
     // Notifications
     'notifications' => 'اعلان ها',
     'notification' => 'اعلان',

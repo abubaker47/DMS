@@ -25,7 +25,7 @@ return [
     'error' => 'Error',
     'warning' => 'Warning',
     'info' => 'Information',
-    
+
     // Departments
     'departments' => 'Departments',
     'department' => 'Department',
@@ -38,7 +38,7 @@ return [
     'department_created' => 'Department created successfully',
     'department_updated' => 'Department updated successfully',
     'department_deleted' => 'Department deleted successfully',
-    
+
     // Users
     'users' => 'Users',
     'user' => 'User',
@@ -62,7 +62,7 @@ return [
     'user_created' => 'User created successfully',
     'user_updated' => 'User updated successfully',
     'user_deleted' => 'User deleted successfully',
-    
+
     // Documents
     'documents' => 'Documents',
     'document' => 'Document',
@@ -95,7 +95,7 @@ return [
     'action' => 'Action',
     'notes' => 'Notes',
     'update_status' => 'Update Status',
-    
+
     // File Types
     'file_types' => 'File Types',
     'file_type' => 'File Type',
@@ -109,7 +109,7 @@ return [
     'file_type_created' => 'File Type created successfully',
     'file_type_updated' => 'File Type updated successfully',
     'file_type_deleted' => 'File Type deleted successfully',
-    
+
     // Languages
     'english' => 'English',
     'dari' => 'Dari',
@@ -117,7 +117,7 @@ return [
     'language' => 'Language',
     'change_language' => 'Change Language',
     'language_updated' => 'Language preference updated successfully',
-    
+
     // Notifications
     'notifications' => 'Notifications',
     'notification' => 'Notification',
