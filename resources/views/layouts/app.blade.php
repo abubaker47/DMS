@@ -13,6 +13,9 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- Page Specific Styles -->
+        @stack('styles')
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -32,5 +35,20 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <!-- Page Specific Scripts -->
+        @stack('scripts')
+
+        <!-- Debug Alpine.js -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('Alpine.js version:', window.Alpine ? window.Alpine.version : 'Not loaded');
+
+                // Debug modal events
+                document.addEventListener('open-modal', function(event) {
+                    console.log('open-modal event triggered with detail:', event.detail);
+                });
+            });
+        </script>
     </body>
 </html>

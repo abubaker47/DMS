@@ -52,4 +52,20 @@ class FileType extends Model
             default => $this->name,
         };
     }
+
+    /**
+     * Get the translation for a given attribute.
+     */
+    public function getTranslation(string $attribute, string $locale = 'en'): string|null
+    {
+        if ($attribute === 'name') {
+            return match ($locale) {
+                'dari' => $this->name_dari ?: $this->name,
+                'pashto' => $this->name_pashto ?: $this->name,
+                default => $this->name,
+            };
+        }
+
+        return $this->$attribute;
+    }
 }

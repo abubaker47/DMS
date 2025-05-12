@@ -17,6 +17,7 @@ $maxWidth = [
 <div
     x-data="{
         show: @js($show),
+        modalName: '{{ $name }}',
         focusables() {
             // All focusable element types...
             let selector = 'a, button, input:not([type=\'hidden\']), textarea, select, details, [tabindex]:not([tabindex=\'-1\'])'
@@ -31,14 +32,32 @@ $maxWidth = [
         nextFocusableIndex() { return (this.focusables().indexOf(document.activeElement) + 1) % (this.focusables().length + 1) },
         prevFocusableIndex() { return Math.max(0, this.focusables().indexOf(document.activeElement)) -1 },
     }"
-    x-init="$watch('show', value => {
-        if (value) {
-            document.body.classList.add('overflow-y-hidden');
-            {{ $attributes->has('focusable') ? 'setTimeout(() => firstFocusable().focus(), 100)' : '' }}
-        } else {
-            document.body.classList.remove('overflow-y-hidden');
-        }
-    })"
+    x-init="
+        console.log('Modal initialized:', modalName);
+        $watch('show', value => {
+            console.log('Modal show changed:', modalName, value);
+            if (value) {
+                document.body.classList.add('overflow-y-hidden');
+                {{ $attributes->has('focusable') ? 'setTimeout(() => firstFocusable().focus(), 100)' : '' }}
+            } else {
+                document.body.classList.remove('overflow-y-hidden');
+            }
+        });
+
+        window.addEventListener('open-modal', event => {
+            console.log('Window open-modal event received:', event.detail, 'Modal name:', modalName);
+            if (event.detail === modalName) {
+                show = true;
+            }
+        });
+
+        window.addEventListener('close-modal', event => {
+            console.log('Window close-modal event received:', event.detail, 'Modal name:', modalName);
+            if (event.detail === modalName) {
+                show = false;
+            }
+        });
+    "
     x-on:open-modal.window="$event.detail == '{{ $name }}' ? show = true : null"
     x-on:close-modal.window="$event.detail == '{{ $name }}' ? show = false : null"
     x-on:close.stop="show = false"
@@ -52,7 +71,7 @@ $maxWidth = [
     <div
         x-show="show"
         class="fixed inset-0 transform transition-all"
-        x-on:click="show = false"
+        onclick="window.dispatchEvent(new CustomEvent('close-modal', { detail: '{{ $name }}' }))"
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"

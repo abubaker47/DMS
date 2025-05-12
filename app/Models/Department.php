@@ -81,4 +81,26 @@ class Department extends Model
             default => $this->description,
         };
     }
+
+    /**
+     * Get the translation for a given attribute.
+     */
+    public function getTranslation(string $attribute, string $locale = 'en'): string|null
+    {
+        if ($attribute === 'name') {
+            return match ($locale) {
+                'dari' => $this->name_dari ?: $this->name,
+                'pashto' => $this->name_pashto ?: $this->name,
+                default => $this->name,
+            };
+        } elseif ($attribute === 'description') {
+            return match ($locale) {
+                'dari' => $this->description_dari ?: $this->description,
+                'pashto' => $this->description_pashto ?: $this->description,
+                default => $this->description,
+            };
+        }
+
+        return $this->$attribute;
+    }
 }
