@@ -301,34 +301,6 @@
                     form.off('submit').submit();
                 }
             });
-
-            // Debug modal functionality
-            console.log('Department index page loaded');
-
-            // Add test button for direct modal opening
-            const testButton = document.createElement('button');
-            testButton.textContent = 'Test Modal';
-            testButton.style.position = 'fixed';
-            testButton.style.top = '10px';
-            testButton.style.right = '10px';
-            testButton.style.zIndex = '9999';
-            testButton.style.padding = '5px 10px';
-            testButton.style.backgroundColor = 'blue';
-            testButton.style.color = 'white';
-            testButton.style.border = 'none';
-            testButton.style.borderRadius = '4px';
-
-            testButton.addEventListener('click', function() {
-                console.log('Test button clicked');
-                window.dispatchEvent(new CustomEvent('open-modal', { detail: 'create-department-modal' }));
-            });
-
-            document.body.appendChild(testButton);
-
-            // Add direct event listeners to debug modal events
-            window.addEventListener('open-modal', function(event) {
-                console.log('open-modal event triggered globally with detail:', event.detail);
-            });
         });
     </script>
     @endpush

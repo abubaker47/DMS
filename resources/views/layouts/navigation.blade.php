@@ -15,6 +15,28 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    @can('viewAny', App\Models\Department::class)
+                    <x-nav-link :href="route('departments.index')" :active="request()->routeIs('departments.*')">
+                        {{ __('Departments') }}
+                    </x-nav-link>
+                    @endcan
+
+                    @can('viewAny', App\Models\User::class)
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                        {{ __('Users') }}
+                    </x-nav-link>
+                    @endcan
+
+                    <x-nav-link :href="route('documents.index')" :active="request()->routeIs('documents.*')">
+                        {{ __('Documents') }}
+                    </x-nav-link>
+
+                    @can('viewAny', App\Models\FileType::class)
+                    <x-nav-link :href="route('file-types.index')" :active="request()->routeIs('file-types.*')">
+                        {{ __('File Types') }}
+                    </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -70,6 +92,28 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            @can('viewAny', App\Models\Department::class)
+            <x-responsive-nav-link :href="route('departments.index')" :active="request()->routeIs('departments.*')">
+                {{ __('Departments') }}
+            </x-responsive-nav-link>
+            @endcan
+
+            @can('viewAny', App\Models\User::class)
+            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                {{ __('Users') }}
+            </x-responsive-nav-link>
+            @endcan
+
+            <x-responsive-nav-link :href="route('documents.index')" :active="request()->routeIs('documents.*')">
+                {{ __('Documents') }}
+            </x-responsive-nav-link>
+
+            @can('viewAny', App\Models\FileType::class)
+            <x-responsive-nav-link :href="route('file-types.index')" :active="request()->routeIs('file-types.*')">
+                {{ __('File Types') }}
+            </x-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->
