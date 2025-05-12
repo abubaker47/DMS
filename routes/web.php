@@ -41,6 +41,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Document routes
     Route::resource('documents', DocumentController::class);
     Route::get('/documents/{document}/download', [DocumentController::class, 'download'])->name('documents.download');
+    Route::get('/documents/{document}/preview', [DocumentController::class, 'preview'])->name('documents.preview');
+    Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');
     Route::post('/documents/{document}/status', [DocumentController::class, 'updateStatus'])->name('documents.status.update');
 });
 

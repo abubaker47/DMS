@@ -53,15 +53,87 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     @if(session('success'))
-                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
-                            <span class="block sm:inline">{{ session('success') }}</span>
+                        <div id="success-alert" class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-500 bg-green-50 rounded-lg shadow-md animate-fade-in" role="alert">
+                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-600 bg-green-100 rounded-lg">
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                                </svg>
+                                <span class="sr-only">Success icon</span>
+                            </div>
+                            <div class="ml-3 text-sm font-medium">
+                                {{ session('success') }}
+                            </div>
+                            <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8" data-dismiss-target="#success-alert" aria-label="Close" onclick="this.parentElement.remove()">
+                                <span class="sr-only">Close</span>
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                            </button>
                         </div>
+
+                        <style>
+                            @keyframes fadeIn {
+                                from { opacity: 0; transform: translateY(-10px); }
+                                to { opacity: 1; transform: translateY(0); }
+                            }
+                            .animate-fade-in {
+                                animation: fadeIn 0.3s ease-out forwards;
+                            }
+                        </style>
+
+                        <script>
+                            // Auto-dismiss the alert after 5 seconds
+                            setTimeout(function() {
+                                const alert = document.getElementById('success-alert');
+                                if (alert) {
+                                    alert.style.opacity = '0';
+                                    alert.style.transform = 'translateY(-10px)';
+                                    alert.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                                    setTimeout(function() {
+                                        if (alert.parentNode) {
+                                            alert.parentNode.removeChild(alert);
+                                        }
+                                    }, 300);
+                                }
+                            }, 5000);
+                        </script>
                     @endif
 
                     @if(session('error'))
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                            <span class="block sm:inline">{{ session('error') }}</span>
+                        <div id="error-alert" class="flex items-center p-4 mb-4 text-red-800 border-t-4 border-red-500 bg-red-50 rounded-lg shadow-md animate-fade-in" role="alert">
+                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-600 bg-red-100 rounded-lg">
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
+                                </svg>
+                                <span class="sr-only">Error icon</span>
+                            </div>
+                            <div class="ml-3 text-sm font-medium">
+                                {{ session('error') }}
+                            </div>
+                            <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8" data-dismiss-target="#error-alert" aria-label="Close" onclick="this.parentElement.remove()">
+                                <span class="sr-only">Close</span>
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                            </button>
                         </div>
+
+                        <script>
+                            // Auto-dismiss the error alert after 5 seconds
+                            setTimeout(function() {
+                                const alert = document.getElementById('error-alert');
+                                if (alert) {
+                                    alert.style.opacity = '0';
+                                    alert.style.transform = 'translateY(-10px)';
+                                    alert.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                                    setTimeout(function() {
+                                        if (alert.parentNode) {
+                                            alert.parentNode.removeChild(alert);
+                                        }
+                                    }, 300);
+                                }
+                            }, 5000);
+                        </script>
                     @endif
 
                     <div class="overflow-x-auto">
