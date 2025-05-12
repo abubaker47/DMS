@@ -40,6 +40,11 @@
                 </div>
             </div>
 
+            <!-- Language Selector -->
+            <div class="hidden sm:flex sm:items-center sm:ms-6 mr-3">
+                <x-language-selector />
+            </div>
+
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
@@ -127,6 +132,35 @@
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
+
+                <!-- Language Options -->
+                <div class="px-4 py-2 text-sm text-gray-700">
+                    {{ __('messages.change_language') }}:
+                </div>
+
+                <form method="POST" action="{{ route('language.change') }}" class="px-4 py-1">
+                    @csrf
+                    <input type="hidden" name="language" value="en">
+                    <button type="submit" class="w-full text-left text-sm text-gray-700 {{ app()->getLocale() == 'en' ? 'text-green-600 font-bold' : '' }}">
+                        {{ __('messages.english') }}
+                    </button>
+                </form>
+
+                <form method="POST" action="{{ route('language.change') }}" class="px-4 py-1">
+                    @csrf
+                    <input type="hidden" name="language" value="dari">
+                    <button type="submit" class="w-full text-left text-sm text-gray-700 {{ app()->getLocale() == 'dari' ? 'text-green-600 font-bold' : '' }}">
+                        {{ __('messages.dari') }}
+                    </button>
+                </form>
+
+                <form method="POST" action="{{ route('language.change') }}" class="px-4 py-1">
+                    @csrf
+                    <input type="hidden" name="language" value="pashto">
+                    <button type="submit" class="w-full text-left text-sm text-gray-700 {{ app()->getLocale() == 'pashto' ? 'text-green-600 font-bold' : '' }}">
+                        {{ __('messages.pashto') }}
+                    </button>
+                </form>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
