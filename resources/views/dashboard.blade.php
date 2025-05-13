@@ -1,12 +1,18 @@
 <x-app-layout>
-    <div class="py-12">
+    <div class="py-12 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-3xl font-bold text-gray-800 mb-10">Dashboard Overview</h1>
+            <div class="flex items-center justify-between mb-10 opacity-0 transform translate-y-4" x-data x-init="setTimeout(() => { $el.classList.add('opacity-100', 'translate-y-0', 'transition-all', 'duration-700', 'ease-out') }, 100)">
+                <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight">Dashboard Overview</h1>
+                <div class="text-right">
+                    <p class="text-sm text-gray-600" x-data="clock()" x-init="startClock()" x-text="time"></p>
+                    <p class="text-xs text-gray-500">{{ now()->format('l, F j, Y') }}</p>
+                </div>
+            </div>
 
             <!-- Stats Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10" x-data="{ shown: false }" x-init="setTimeout(() => shown = true, 200)" x-cloak>
                 <!-- Stat Card Component -->
-                <div class="bg-white shadow-md rounded-2xl p-6 border-t-4 border-blue-500 hover:shadow-lg transition">
+                <div class="bg-white shadow-lg rounded-2xl p-6 border-l-4 border-blue-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" x-show="shown" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform translate-y-4" x-transition:enter-end="opacity-100 transform translate-y-0" style="backdrop-filter: blur(20px);">
                     <div class="flex items-center space-x-4">
                         <div class="p-3 bg-blue-100 text-blue-600 rounded-full">
                             <!-- Icon -->
@@ -65,15 +71,15 @@
             </div>
 
             <!-- Charts Section -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
-                <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10" x-data="{ shown: false }" x-init="setTimeout(() => shown = true, 400)" x-cloak>
+                <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" x-show="shown" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform translate-y-4" x-transition:enter-end="opacity-100 transform translate-y-0" style="backdrop-filter: blur(20px);">
                     <h3 class="text-lg font-semibold text-gray-700 mb-4">Documents per Department</h3>
                     <div class="h-64">
                         <canvas id="departmentChart"></canvas>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition">
+                <div class="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" x-show="shown" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform translate-y-4" x-transition:enter-end="opacity-100 transform translate-y-0" style="backdrop-filter: blur(20px);">
                     <h3 class="text-lg font-semibold text-gray-700 mb-4">Documents per File Type</h3>
                     <div class="h-64">
                         <canvas id="fileTypeChart"></canvas>
@@ -82,7 +88,7 @@
             </div>
 
             <!-- Recent Activity -->
-            <div class="bg-white rounded-2xl shadow-md p-6 mb-10">
+            <div class="bg-white rounded-2xl shadow-lg p-6 mb-10 transform transition-all duration-300 hover:shadow-xl" x-data="{ shown: false }" x-init="setTimeout(() => shown = true, 600)" x-show="shown" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform translate-y-4" x-transition:enter-end="opacity-100 transform translate-y-0" style="backdrop-filter: blur(20px);">
                 <h3 class="text-lg font-semibold text-gray-700 mb-4">Recent Activity</h3>
                 <div class="overflow-x-auto">
                     <div class="min-w-full align-middle">
@@ -111,14 +117,30 @@
     </div>
 
     <!-- Chart.js for charts -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.umd.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+        .chart-container { transition: transform 0.3s ease-in-out; }
+        .chart-container:hover { transform: scale(1.02); }
+    </style>
 
     <!-- Animation and Charts Script -->
     <script>
+        function clock() {
+            return {
+                time: new Date().toLocaleTimeString(),
+                startClock() {
+                    setInterval(() => {
+                        this.time = new Date().toLocaleTimeString();
+                    }, 1000);
+                }
+            };
+        }
         // Counter animation function
         function animateCounter(elementId, targetValue) {
             const element = document.getElementById(elementId);
-            const duration = 1500; // Animation duration in milliseconds
+            const duration = 2000; // Animation duration in milliseconds
             const frameDuration = 1000 / 60; // 60fps
             const totalFrames = Math.round(duration / frameDuration);
             let frame = 0;
@@ -147,33 +169,28 @@
 
             // Department Chart
             const departmentCtx = document.getElementById('departmentChart').getContext('2d');
-            const departmentData = {!! json_encode($documentsPerDepartment) !!};
+            const fromDepartmentData = {!! json_encode($documentsFromDepartment) !!};
+            const toDepartmentData = {!! json_encode($documentsToDepartment) !!};
+            const departments = [...new Set([...Object.keys(fromDepartmentData), ...Object.keys(toDepartmentData)])];
 
             new Chart(departmentCtx, {
                 type: 'bar',
                 data: {
-                    labels: Object.keys(departmentData),
+                    labels: departments,
                     datasets: [{
-                        label: 'Documents',
-                        data: Object.values(departmentData),
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.7)',   // Pink
-                            'rgba(54, 162, 235, 0.7)',   // Blue
-                            'rgba(255, 206, 86, 0.7)',   // Yellow
-                            'rgba(75, 192, 192, 0.7)',   // Teal
-                            'rgba(153, 102, 255, 0.7)',  // Purple
-                            'rgba(255, 159, 64, 0.7)',   // Orange
-                            'rgba(46, 204, 113, 0.7)',   // Green
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)',
-                            'rgba(46, 204, 113, 1)',
-                        ],
+                        label: 'Documents Sent',
+                        data: departments.map(dept => fromDepartmentData[dept] || 0),
+                        backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 2,
+                        borderRadius: 8,
+                        borderSkipped: false
+                    },
+                    {
+                        label: 'Documents Received',
+                        data: departments.map(dept => toDepartmentData[dept] || 0),
+                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 2,
                         borderRadius: 8,
                         borderSkipped: false
@@ -183,6 +200,14 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     animation: {
+                        onComplete: function() {
+                            const ctx = this.ctx;
+                            ctx.save();
+                            ctx.globalCompositeOperation = 'destination-over';
+                            ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+                            ctx.fillRect(0, 0, this.width, this.height);
+                            ctx.restore();
+                        },
                         delay: (context) => context.dataIndex * 100,
                         duration: 2000,
                         easing: 'easeInOutQuart'
@@ -261,6 +286,14 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     animation: {
+                        onComplete: function() {
+                            const ctx = this.ctx;
+                            ctx.save();
+                            ctx.globalCompositeOperation = 'destination-over';
+                            ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+                            ctx.fillRect(0, 0, this.width, this.height);
+                            ctx.restore();
+                        },
                         animateRotate: true,
                         animateScale: true,
                         duration: 2000,

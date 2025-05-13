@@ -22,8 +22,9 @@ class DashboardController extends Controller
         $departmentCount = Department::count();
         $fileTypeCount = FileType::count();
 
-        // For charts: documents per department, documents per file type
-        $documentsPerDepartment = Department::withCount('sentDocuments')->get()->pluck('sent_documents_count', 'name');
+        // For charts: documents per department (sent and received), documents per file type
+        $documentsFromDepartment = Department::withCount('sentDocuments')->get()->pluck('sent_documents_count', 'name');
+        $documentsToDepartment = Department::withCount('receivedDocuments')->get()->pluck('received_documents_count', 'name');
         $documentsPerFileType = FileType::withCount('documents')->get()->pluck('documents_count', 'name');
 
         // Get recent activities
@@ -37,7 +38,8 @@ class DashboardController extends Controller
             'userCount' => $userCount,
             'departmentCount' => $departmentCount,
             'fileTypeCount' => $fileTypeCount,
-            'documentsPerDepartment' => $documentsPerDepartment,
+            'documentsFromDepartment' => $documentsFromDepartment,
+            'documentsToDepartment' => $documentsToDepartment,
             'documentsPerFileType' => $documentsPerFileType,
             'recentActivities' => $recentActivities,
         ]);

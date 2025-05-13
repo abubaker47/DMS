@@ -1,4 +1,4 @@
-@props(['id', 'maxWidth', 'title', 'submit'])
+@props(['id', 'maxWidth', 'title', 'submit', 'method' => 'POST'])
 
 <x-modal :name="$id" :maxWidth="$maxWidth ?? '2xl'">
     <div class="px-6 py-4 bg-gray-100 border-b">
@@ -16,7 +16,7 @@
 
     <form id="{{ $id }}-form" method="POST" action="{{ $submit }}" {{ $attributes }}>
         @csrf
-        @if(isset($method) && $method !== 'POST')
+        @if($method !== 'POST')
             @method($method)
         @endif
 

@@ -161,7 +161,7 @@
     </div>
 
     <!-- Edit User Modal -->
-    <x-modal-form id="edit-user-modal-{{ $user->id }}" :title="__('Edit User')" :submit="route('users.update', $user)" method="PUT" enctype="multipart/form-data">
+    <x-modal-form id="edit-user-modal-{{ $user->id }}" :title="__('Edit User')" :submit="route('users.update', $user)" :method="'PUT'" enctype="multipart/form-data">
         <div class="space-y-4">
             <div>
                 <x-input-label for="name-{{ $user->id }}" :value="__('Name')" />

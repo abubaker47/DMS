@@ -71,16 +71,6 @@
                             </li>
                         </ul>
                     </div>
-                    @can('create', App\Models\Document::class)
-                    <div class="fixed bottom-8 right-8 z-10">
-                        <button type="button" onclick="window.dispatchEvent(new CustomEvent('open-modal', { detail: 'upload-document-modal' }))" class="flex items-center justify-center h-16 w-16 rounded-full bg-green-500 text-white shadow-xl hover:bg-green-600 hover:shadow-2xl transform hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-green-300 focus:ring-opacity-50" style="background-color: #10b981; color: white;">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="sr-only">{{ __('upload_document') }}</span>
-                        </button>
-                    </div>
-                    @endcan
                     @if(session('success'))
                         <div id="success-alert" class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-500 bg-green-50 rounded-lg shadow-md animate-fade-in" role="alert">
                             <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-600 bg-green-100 rounded-lg">
