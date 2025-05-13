@@ -28,7 +28,7 @@
                                 <p class="text-sm font-medium text-gray-500">{{ __('Name (English)') }}</p>
                                 <p class="mt-1">{{ $department->name }}</p>
                             </div>
-                            
+
                             <div>
                                 <p class="text-sm font-medium text-gray-500">{{ __('Status') }}</p>
                                 <p class="mt-1">
@@ -43,35 +43,35 @@
                                     @endif
                                 </p>
                             </div>
-                            
+
                             @if($department->name_dari)
                             <div>
                                 <p class="text-sm font-medium text-gray-500">{{ __('Name (Dari)') }}</p>
                                 <p class="mt-1">{{ $department->name_dari }}</p>
                             </div>
                             @endif
-                            
+
                             @if($department->name_pashto)
                             <div>
                                 <p class="text-sm font-medium text-gray-500">{{ __('Name (Pashto)') }}</p>
                                 <p class="mt-1">{{ $department->name_pashto }}</p>
                             </div>
                             @endif
-                            
+
                             @if($department->description)
                             <div class="col-span-1 md:col-span-2">
                                 <p class="text-sm font-medium text-gray-500">{{ __('Description (English)') }}</p>
                                 <p class="mt-1">{{ $department->description }}</p>
                             </div>
                             @endif
-                            
+
                             @if($department->description_dari)
                             <div class="col-span-1 md:col-span-2">
                                 <p class="text-sm font-medium text-gray-500">{{ __('Description (Dari)') }}</p>
                                 <p class="mt-1">{{ $department->description_dari }}</p>
                             </div>
                             @endif
-                            
+
                             @if($department->description_pashto)
                             <div class="col-span-1 md:col-span-2">
                                 <p class="text-sm font-medium text-gray-500">{{ __('Description (Pashto)') }}</p>
@@ -80,7 +80,7 @@
                             @endif
                         </div>
                     </div>
-                    
+
                     <div class="mt-8">
                         <h3 class="text-lg font-medium text-gray-900">{{ __('Department Statistics') }}</h3>
                         <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -88,12 +88,12 @@
                                 <p class="text-sm font-medium text-blue-800">{{ __('Users') }}</p>
                                 <p class="mt-1 text-2xl font-semibold">{{ $department->users()->count() }}</p>
                             </div>
-                            
+
                             <div class="bg-green-50 p-4 rounded-lg">
                                 <p class="text-sm font-medium text-green-800">{{ __('Sent Documents') }}</p>
                                 <p class="mt-1 text-2xl font-semibold">{{ $department->sentDocuments()->count() }}</p>
                             </div>
-                            
+
                             <div class="bg-purple-50 p-4 rounded-lg">
                                 <p class="text-sm font-medium text-purple-800">{{ __('Received Documents') }}</p>
                                 <p class="mt-1 text-2xl font-semibold">{{ $department->receivedDocuments()->count() }}</p>

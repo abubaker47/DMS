@@ -19,7 +19,7 @@
 
                         <div class="mb-6">
                             <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('English Information') }}</h3>
-                            
+
                             <div class="mb-4">
                                 <x-input-label for="name" :value="__('Name')" />
                                 <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
@@ -35,7 +35,7 @@
 
                         <div class="mb-6">
                             <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('Dari Information') }}</h3>
-                            
+
                             <div class="mb-4">
                                 <x-input-label for="name_dari" :value="__('Name (Dari)')" />
                                 <x-text-input id="name_dari" class="block mt-1 w-full" type="text" name="name_dari" :value="old('name_dari')" dir="rtl" />
@@ -51,7 +51,7 @@
 
                         <div class="mb-6">
                             <h3 class="text-lg font-medium text-gray-900 mb-4">{{ __('Pashto Information') }}</h3>
-                            
+
                             <div class="mb-4">
                                 <x-input-label for="name_pashto" :value="__('Name (Pashto)')" />
                                 <x-text-input id="name_pashto" class="block mt-1 w-full" type="text" name="name_pashto" :value="old('name_pashto')" dir="rtl" />

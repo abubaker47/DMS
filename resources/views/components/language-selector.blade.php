@@ -1,6 +1,6 @@
 <div class="relative" x-data="{ open: false }">
     <button @click="open = !open" class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-        <div>{{ __('messages.language') }}</div>
+        <div>{{ __('language') }}</div>
 
         <div class="ml-1">
             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -15,23 +15,23 @@
                 @csrf
                 <input type="hidden" name="language" value="en">
                 <button type="submit" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ app()->getLocale() == 'en' ? 'bg-green-100' : '' }}" role="menuitem" tabindex="-1">
-                    {{ __('messages.english') }}
+                    {{ __('english') }}
                 </button>
             </form>
-            
+
             <form method="POST" action="{{ route('language.change') }}">
                 @csrf
                 <input type="hidden" name="language" value="dari">
                 <button type="submit" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ app()->getLocale() == 'dari' ? 'bg-green-100' : '' }}" role="menuitem" tabindex="-1">
-                    {{ __('messages.dari') }}
+                    {{ __('dari') }}
                 </button>
             </form>
-            
+
             <form method="POST" action="{{ route('language.change') }}">
                 @csrf
                 <input type="hidden" name="language" value="pashto">
                 <button type="submit" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ app()->getLocale() == 'pashto' ? 'bg-green-100' : '' }}" role="menuitem" tabindex="-1">
-                    {{ __('messages.pashto') }}
+                    {{ __('pashto') }}
                 </button>
             </form>
         </div>

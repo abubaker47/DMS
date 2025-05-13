@@ -67,6 +67,8 @@ return [
     'documents' => 'Documents',
     'document' => 'Document',
     'document_list' => 'Document List',
+    'sent_documents' => 'Sent Documents',
+    'received_documents' => 'Received Documents',
     'create_document' => 'Create Document',
     'document_details' => 'Document Details',
     'file_name' => 'File Name',
@@ -76,8 +78,8 @@ return [
     'to_department' => 'To Department',
     'created_by' => 'Created By',
     'description' => 'Description',
-    'upload_file' => 'Upload File',
-    'encrypt_file' => 'Encrypt File',
+    'upload_document' => 'Upload Document',
+    'encrypt_document' => 'Encrypt Document',
     'document_created' => 'Document created successfully',
     'document_updated' => 'Document updated successfully',
     'document_deleted' => 'Document deleted successfully',
@@ -126,4 +128,12 @@ return [
     'no_notifications' => 'No notifications',
     'new_document_assigned' => 'New Document Assigned',
     'document_assigned_message' => 'A new document has been assigned to your department.',
+    
+    // DataTables translations
+    'Search' => 'Search',
+    'Showing _START_ to _END_ of _TOTAL_ entries' => 'Showing _START_ to _END_ of _TOTAL_ entries',
+    'Showing 0 to 0 of 0 entries' => 'Showing 0 to 0 of 0 entries',
+    '(filtered from _MAX_ total entries)' => '(filtered from _MAX_ total entries)',
+    'No data available in table' => 'No data available in table',
+    'Status' => 'Status',
 ];

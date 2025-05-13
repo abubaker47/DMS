@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Document;
 use App\Models\User;
-use App\Models\Department;
+use App\Models\Document;
 use App\Models\FileType;
+use App\Models\Department;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $this->authorize('isAdmin');
+        if (!Auth::user()->isAdmin()) {
+            return redirect()->route('documents.index');
+        }
 
         $documentCount = Document::count();
         $userCount = User::count();

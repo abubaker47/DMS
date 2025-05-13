@@ -23,24 +23,29 @@ class DocumentController extends Controller
     {
         $user = Auth::user();
         $departmentId = $user->department_id;
+        $type = $request->get('type', 'sent');
 
-        // Admin can see all documents
+        $query = Document::with(['fromDepartment', 'toDepartment', 'creator', 'fileType']);
+
         if ($user->isAdmin()) {
-            $documents = Document::with(['fromDepartment', 'toDepartment', 'creator', 'fileType'])
-                ->latest()
-                ->paginate(10);
+            // Admin can see all documents but still filtered by sent/received
+            if ($type === 'sent') {
+                $query->where('from_department_id', $departmentId);
+            } else {
+                $query->where('to_department_id', $departmentId);
+            }
         } else {
-            // Regular users can only see documents related to their department
-            $documents = Document::with(['fromDepartment', 'toDepartment', 'creator', 'fileType'])
-                ->where(function ($query) use ($departmentId) {
-                    $query->where('from_department_id', $departmentId)
-                          ->orWhere('to_department_id', $departmentId);
-                })
-                ->latest()
-                ->paginate(10);
+            // Regular users documents filtered by sent/received
+            if ($type === 'sent') {
+                $query->where('from_department_id', $departmentId);
+            } else {
+                $query->where('to_department_id', $departmentId);
+            }
         }
 
-        return view('documents.index', compact('documents'));
+        $documents = $query->latest()->paginate(10);
+
+        return view('documents.index', compact('documents', 'type'));
     }
 
     /**

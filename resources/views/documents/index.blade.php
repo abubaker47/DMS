@@ -2,14 +2,14 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Documents') }}
+                {{ __('messages.documents') }}
             </h2>
             @can('create', App\Models\Document::class)
             <button type="button" onclick="window.dispatchEvent(new CustomEvent('open-modal', { detail: 'upload-document-modal' }))" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md shadow-md flex items-center transition-all duration-200 hover:shadow-lg" style="background-color: #10b981; color: white;">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                 </svg>
-                {{ __('Upload Document') }}
+                {{ __('upload_document') }}
             </button>
             @endcan
         </div>
@@ -52,13 +52,32 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    <!-- Tabs -->
+                    <div class="mb-6 border-b border-gray-200">
+                        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
+                            <li class="mr-2">
+                                <a href="{{ route('documents.index', ['type' => 'sent']) }}"
+                                   class="inline-block p-4 {{ $type === 'sent' ? 'text-blue-600 border-b-2 border-blue-600 active' : 'text-gray-500 hover:text-gray-600 hover:border-gray-300 border-b-2 border-transparent' }}
+                                          rounded-t-lg">
+                                    {{ __('sent_documents') }}
+                                </a>
+                            </li>
+                            <li class="mr-2">
+                                <a href="{{ route('documents.index', ['type' => 'received']) }}"
+                                   class="inline-block p-4 {{ $type === 'received' ? 'text-blue-600 border-b-2 border-blue-600 active' : 'text-gray-500 hover:text-gray-600 hover:border-gray-300 border-b-2 border-transparent' }}
+                                          rounded-t-lg">
+                                    {{ __('received_documents') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                     @can('create', App\Models\Document::class)
                     <div class="fixed bottom-8 right-8 z-10">
                         <button type="button" onclick="window.dispatchEvent(new CustomEvent('open-modal', { detail: 'upload-document-modal' }))" class="flex items-center justify-center h-16 w-16 rounded-full bg-green-500 text-white shadow-xl hover:bg-green-600 hover:shadow-2xl transform hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-green-300 focus:ring-opacity-50" style="background-color: #10b981; color: white;">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                             </svg>
-                            <span class="sr-only">{{ __('Upload Document') }}</span>
+                            <span class="sr-only">{{ __('upload_document') }}</span>
                         </button>
                     </div>
                     @endcan
@@ -246,7 +265,7 @@
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
                                                         <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
                                                     </svg>
-                                                    {{ __('Preview File') }}
+                                                    {{ __('Preview') }}
                                                 </button>
 
                                                 @can('download', $document)
@@ -512,17 +531,6 @@
                     @endforeach
                 </select>
                 <x-input-error :messages="$errors->get('file_type_id')" class="mt-2" />
-            </div>
-
-            <div>
-                <x-input-label for="from_department_id" :value="__('From Department')" />
-                <select id="from_department_id" name="from_department_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
-                    <option value="">{{ __('Select Department') }}</option>
-                    @foreach(\App\Models\Department::where('is_active', true)->get() as $department)
-                        <option value="{{ $department->id }}">{{ $department->getLocalizedName(app()->getLocale()) }}</option>
-                    @endforeach
-                </select>
-                <x-input-error :messages="$errors->get('from_department_id')" class="mt-2" />
             </div>
 
             <div>
