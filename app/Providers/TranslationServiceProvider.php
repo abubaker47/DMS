@@ -27,7 +27,13 @@ class TranslationServiceProvider extends ServiceProvider
                     if ($group === 'messages') {
                         $path = "{$this->path}/{$locale}.php";
                         if ($this->files->exists($path)) {
-                            return $this->files->getRequire($path);
+                            $result = $this->files->getRequire($path);
+                            // Ensure the result is an array
+                            if (is_array($result)) {
+                                return $result;
+                            }
+                            // If not an array, return an empty array to prevent errors
+                            return [];
                         }
                     }
                     return parent::loadPaths($locale, $group);
