@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Document;
 use App\Models\FileType;
 use App\Models\Department;
+use App\Models\Activity;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -25,6 +26,12 @@ class DashboardController extends Controller
         $documentsPerDepartment = Department::withCount('sentDocuments')->get()->pluck('sent_documents_count', 'name');
         $documentsPerFileType = FileType::withCount('documents')->get()->pluck('documents_count', 'name');
 
+        // Get recent activities
+        $recentActivities = Activity::with(['user', 'document'])
+            ->latest()
+            ->take(10)
+            ->get();
+
         return view('dashboard', [
             'documentCount' => $documentCount,
             'userCount' => $userCount,
@@ -32,6 +39,7 @@ class DashboardController extends Controller
             'fileTypeCount' => $fileTypeCount,
             'documentsPerDepartment' => $documentsPerDepartment,
             'documentsPerFileType' => $documentsPerFileType,
+            'recentActivities' => $recentActivities,
         ]);
     }
 }
