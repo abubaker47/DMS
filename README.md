@@ -22,7 +22,7 @@ A modern document management system built with Laravel, featuring file type mana
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/abubaker47/DMS.git
    cd DMS
    ```
 
