@@ -116,8 +116,18 @@ A comprehensive, multilingual document management system built with Laravel 12, 
 
 After seeding, you can log in with these default accounts:
 
-- **Admin User**: Check the `UserSeeder.php` file for default credentials
-- Role-based access: Admin users have full system access
+- **Admin User**
+  - Email: `admin@example.com`
+  - Password: `password`
+  - Role: Administrator with full system access
+
+- **Department Users** (all use password: `password`)
+  - Finance Manager: `finance@example.com`
+  - HR Manager: `hr@example.com`
+  - IT Manager: `it@example.com`
+  - Legal Manager: `legal@example.com`
+
+**Note**: Change these default passwords immediately in a production environment.
 
 ## Configuration
 
